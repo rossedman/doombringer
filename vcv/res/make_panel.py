@@ -7,8 +7,9 @@ Every control is marked with a sigil instead of a word; the README has the
 decoder. Rack's SVG renderer ignores <text>, so the only lettering (the title)
 is converted to outlines with matplotlib's TextPath. Dimensions are real
 Eurorack (3U = 128.5 mm, 1 HP = 5.08 mm), so this is also a starting point for
-a physical front panel. The look, and the hand mark, are shared with Death's
-Hand (github.com/rossedman/deaths-hand), whose panel this one sits beside.
+a physical front panel. The look is shared with Death's Hand
+(github.com/rossedman/deaths-hand), whose panel this one sits beside; the mark
+is Portal's, and the same function draws the docs' logo and favicon.
 """
 
 import math
@@ -367,29 +368,63 @@ def drips(x0, x1, y, rng, keep_clear=()):
     return out
 
 
-# The project's mark (docs/assets/site/favicon.svg): a clawed hand with an eye
-# in its palm. Geometry is in the logo's 200-unit box, centred on (100, 100).
-HAND_FINGERS = [  # (rotation, pivot x, pivot y, path)
-    (-9, 79, 100, "M71,100 L71,55.6 C71,43.6 76.2,39.6 79,30.8 C81.8,39.6 87,43.6 87,55.6 L87,100 Z"),
-    (0, 100, 100, "M91.5,100 L91.5,48.7 C91.5,35.95 97.03,31.7 100,22.35 C102.97,31.7 108.5,35.95 108.5,48.7 L108.5,100 Z"),
-    (9, 121, 100, "M113,100 L113,55.6 C113,43.6 118.2,39.6 121,30.8 C123.8,39.6 129,43.6 129,55.6 L129,100 Z"),
-    (-42, 66, 128, "M58,128 L58,93.6 C58,81.6 63.2,77.6 66,68.8 C68.8,77.6 74,81.6 74,93.6 L74,128 Z"),
-    (42, 134, 128, "M126,128 L126,93.6 C126,81.6 131.2,77.6 134,68.8 C136.8,77.6 142,81.6 142,93.6 L142,128 Z"),
-]
-HAND_PALM = "M62,100 C62,94 67,90 73,90 L127,90 C133,90 138,94 138,100 L140,128 C140,150 124,166 100,170 C76,166 60,150 60,128 Z"
+# The Portal mark (docs/assets/portal.png): a doorway with an eye in a
+# triangle, light pouring from it down to the threshold. Traced in the source
+# image's pixel space, where the door with its threshold spans about 326 x 425.
+PORTAL_CENTER = (541, 495)
+PORTAL_HEIGHT = 425
 
 
-def hand_mark(cx, cy, size):
-    """The mark, `size` mm tall, as a faint relief: dried-blood outline, red eye."""
-    k = size / 150.0
-    out = [f'<g transform="translate({f(cx - 100 * k)} {f(cy - 96 * k)}) scale({k:.5f})">']
-    body = "".join(f'<path transform="rotate({a} {px} {py})" d="{d}"/>' for a, px, py, d in HAND_FINGERS) + f'<path d="{HAND_PALM}"/>'
-    out.append(f'<g fill="{BLOOD_DARK}" stroke="{BLOOD}" stroke-width="3" stroke-linejoin="round">{body}</g>')
-    out.append(f'<g fill="{BLOOD_DARK}">{body}</g>')  # hide the strokes where shapes overlap
-    out.append(f'<path d="M76,128 Q100,110 124,128 Q100,146 76,128 Z" fill="{BLOOD_HI}"/>')
-    out.append(f'<path d="M100,115 Q105,128 100,141 Q95,128 100,115 Z" fill="{BG}"/>')
-    out.append("</g>")
+def portal_elements(color, eye):
+    """The mark's strokes in its own pixel space; the pupil ring is in `eye`."""
+    out = []
+
+    def line(pts, w=13):
+        d = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+        out.append(f'<path d="{d}" fill="none" stroke="{color}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>')
+
+    def spot(x, y, r):
+        out.append(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{color}"/>')
+
+    line([(420, 697), (420, 289), (660, 289), (660, 697)])  # outer frame
+    line([(446, 697), (446, 313), (635, 313), (635, 697)])  # inner frame
+    line([(378, 702), (704, 702)])  # threshold
+    spot(390, 665, 6.5)
+    spot(691, 665, 6.5)
+    line([(452, 436), (540, 322), (629, 436)])  # the triangle
+    for x, y in ((495, 340), (586, 340), (540, 358), (467, 381), (613, 381)):
+        spot(x, y, 6)
+    eye_d = "M475,433 C490,360 590,360 606,433 C588,474 492,474 475,433 Z"
+    out.append(f'<path d="{eye_d}" fill="none" stroke="{color}" stroke-width="13" stroke-linejoin="round"/>')
+    out.append(f'<circle cx="540" cy="425" r="29" fill="none" stroke="{color}" stroke-width="13"/>')
+    out.append(f'<circle cx="540" cy="425" r="14" fill="none" stroke="{eye}" stroke-width="9"/>')
+
+    def lid(x):  # just below the lower lid
+        u = min(1.0, abs(x - 540) / 66)
+        return 438 + 30 * math.sqrt(1 - u * u)
+
+    # Rays from along the lower lid out to the frame and the threshold.
+    starts = (478, 490, 503, 515, 527, 540)
+    ends = ((452, 500), (452, 568), (452, 642), (482, 697), (507, 697), (526, 697))
+    for x0, (x1, y1) in zip(starts, ends, strict=True):
+        for side in (-1, 1):
+            line([(540 + side * (x0 - 540), lid(x0)), (540 + side * (x1 - 540), y1)], w=9)
     return out
+
+
+def portal_mark(cx, cy, size, color=BLOOD, eye=BLOOD_HI):
+    """The mark, `size` mm tall, centred on (cx, cy)."""
+    k = size / PORTAL_HEIGHT
+    ox, oy = PORTAL_CENTER
+    return [f'<g transform="translate({f(cx - ox * k)} {f(cy - oy * k)}) scale({k:.6f})">', *portal_elements(color, eye), "</g>"]
+
+
+def portal_logo(color, eye):
+    """The mark alone as a square SVG, for the docs' logo and favicon."""
+    ox, oy = PORTAL_CENTER
+    half = PORTAL_HEIGHT / 2 + 8
+    box = f"{ox - half:.0f} {oy - half:.0f} {2 * half:.0f} {2 * half:.0f}"
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}">' + "".join(portal_elements(color, eye)) + "</svg>\n"
 
 
 # ----------------------------------------------------------------- panel
@@ -435,7 +470,7 @@ def svg(spec):
         out.append(poly([(x, 79.3), (x + 0.5, 80), (x, 80.7), (x - 0.5, 80), (x, 79.3)], color=BLOOD, w=0.2))
 
     # The mark, in the space left of the altar.
-    out += hand_mark(spec["mark_x"], 116.5, 15.0)
+    out += portal_mark(spec["mark_x"], 116.5, 15.0)
 
     # Output altar.
     ax0, ax1 = spec["altar"][0] - 7.5, spec["altar"][1] + 7.5
@@ -513,3 +548,9 @@ if __name__ == "__main__":
     (root / "res" / "panel-preview.svg").write_text(preview(SPEC))
     (root / "src" / "PanelLayout.hpp").write_text(header(SPEC))
     print(f"wrote {root / 'res/Doombringer.svg'}, {root / 'res/panel-preview.svg'} and {root / 'src/PanelLayout.hpp'} ({HP} HP)")
+    site = root.parent / "docs" / "assets" / "site"
+    if site.is_dir():  # not in make panel-check's scratch copy
+        logo = portal_logo("#efe3cb", "#e8363f")  # bone and fresh blood, the site's own colours
+        (site / "logo.svg").write_text(logo)
+        (site / "favicon.svg").write_text(logo)
+        print(f"wrote {site / 'logo.svg'} and {site / 'favicon.svg'}")

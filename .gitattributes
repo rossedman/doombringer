@@ -9,3 +9,5 @@
 vcv/res/Doombringer.svg linguist-generated=true
 vcv/res/panel-preview.svg linguist-generated=true
 vcv/src/PanelLayout.hpp linguist-generated=true
+docs/assets/site/logo.svg linguist-generated=true
+docs/assets/site/favicon.svg linguist-generated=true

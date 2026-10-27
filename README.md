@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="docs/assets/portal.png" alt="Portal: a doorway with an eye in a triangle, light pouring down to the threshold" width="240">
+</p>
+
+<p align="center">
   <img src="vcv/res/panel-preview.svg" alt="The Doombringer panel" width="280">
 </p>
 
@@ -61,7 +65,7 @@ There are no words on the panel, only sigils. The top row is the voice: the cuto
 | Blood drop (solid) | Filter out (the morph) |
 | Blood drop with four poles | Four-pole low-pass out |
 
-Bone rings mark inputs, red rings mark outputs, and the outputs sit on the altar. The hand (the mark Doombringer shares with Death's Hand), the edge runes and the summoning circle are decoration.
+Bone rings mark inputs, red rings mark outputs, and the outputs sit on the altar. The Portal mark (the doorway with the eye, bottom left), the edge runes and the summoning circle are decoration.
 
 ## The macros
 
@@ -218,4 +222,4 @@ Bug reports, DSP fixes, tests and new ways to misbehave are welcome. Read [CONTR
 
 ## License
 
-[MIT](LICENSE) © 2026 Ross Edman. The vendored fonts in `docs/assets/` are under the SIL Open Font License.
+[MIT](LICENSE) © 2026 Ross Edman. The vendored fonts in `docs/assets/` are under the SIL Open Font License. The Portal logo (`docs/assets/portal.png`, and the mark traced from it in `vcv/res/make_panel.py`) is the project's mark.
