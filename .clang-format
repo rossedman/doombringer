@@ -1,0 +1,22 @@
+# C++ style for dsp/, hw/, vcv/src/ and test/. Check with `make lint-cpp`, fix with `make fmt`.
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 160
+AccessModifierOffset: -2
+NamespaceIndentation: None
+AlwaysBreakTemplateDeclarations: Yes
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AlignConsecutiveDeclarations: Consecutive
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveMacros: Consecutive
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 1
+SortIncludes: Never
+ReflowComments: false
+PointerAlignment: Left
+AlignEscapedNewlines: Left

@@ -1,0 +1,6 @@
+# Python tooling: vcv/res/make_panel.py and docs/assets scripts.
+line-length = 160
+target-version = "py310"
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP", "EXE"]

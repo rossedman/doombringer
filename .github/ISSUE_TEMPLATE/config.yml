@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/rossedman/doombringer/security/advisories/new
+    about: Report security problems privately, as described in the security policy.
+  - name: Docs
+    url: https://rossedman.io/doombringer/
+    about: The panel decoder, the patch.Init control map and five patches to start from.

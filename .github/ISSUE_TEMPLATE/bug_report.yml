@@ -1,0 +1,66 @@
+name: Bug report
+description: Something sounds or behaves wrong in a way that isn't the point.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Screaming, folding and chaotic sounds are intended. Report it if a control does the wrong thing, the module crashes or goes silent, self-oscillation drifts out of tune, or the build fails.
+        Security problems go to the [private advisory form](https://github.com/rossedman/doombringer/security/advisories/new), not here.
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target
+      options:
+        - patch.Init firmware
+        - VCV Rack plugin
+        - Host tests or build
+        - Docs
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: The release tag (for example v2.0.0) or the commit you built from.
+      placeholder: v2.0.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: For VCV, the Rack version and OS. For the firmware, how you flashed it and what else is in the case. For builds, the OS and compiler version.
+      placeholder: VCV Rack 2.6.4 on macOS 15, Apple silicon
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Knob positions (clock faces are fine), toggle, shift settings and what is patched into which jack. Attach a .vcv patch if you can.
+      placeholder: |
+        1. Toggle up, a saw into IN L
+        2. K1 12:00, K2 2:00, K3 9:00, S1 9:30
+        3. Patch a 1 V/oct sequence into CV_5
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead. A short recording or scope capture helps.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Build output, Rack's log.txt, or the CPU meter output from `make -C hw CPU_METER=1`.
+      render: text

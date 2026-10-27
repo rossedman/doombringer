@@ -1,0 +1,27 @@
+{
+  "slug": "Doombringer",
+  "name": "Doombringer",
+  "version": "2.0.0",
+  "license": "MIT",
+  "brand": "Ross",
+  "author": "Ross Edman",
+  "authorEmail": "",
+  "authorUrl": "https://github.com/rossedman",
+  "pluginUrl": "https://rossedman.io/doombringer/",
+  "manualUrl": "https://rossedman.io/doombringer/panel/",
+  "sourceUrl": "https://github.com/rossedman/doombringer",
+  "donateUrl": "",
+  "changelogUrl": "https://github.com/rossedman/doombringer/blob/main/CHANGELOG.md",
+  "modules": [
+    {
+      "slug": "Doombringer",
+      "name": "Doombringer",
+      "description": "A ladder filter that summons what isn't there: self-oscillation in tune, a resonance that folds and bends its own cutoff, undertones an octave and two below the input, an envelope that feeds the cutoff, and a ping. Same DSP as the patch.Init firmware.",
+      "tags": [
+        "Filter",
+        "Distortion",
+        "Envelope follower"
+      ]
+    }
+  ]
+}

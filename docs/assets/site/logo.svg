@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs>
+  <linearGradient id="bone" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fbf2df"/><stop offset="0.55" stop-color="#e2d3b6"/><stop offset="1" stop-color="#a8957a"/>
+  </linearGradient>
+  <linearGradient id="blood" x1="0" y1="0" x2="0.6" y2="1">
+    <stop offset="0" stop-color="#ff5a5f"/><stop offset="0.6" stop-color="#d8212b"/><stop offset="1" stop-color="#7a0b10"/>
+  </linearGradient>
+</defs>
+<g fill="none" stroke="#7a0b10" stroke-width="2.2"><circle cx="100" cy="100" r="94"/></g>
+<g fill="none" stroke="#7a0b10" stroke-width="1.2"><circle cx="100" cy="100" r="87"/></g>
+<path d="M111.36,13.74L112.27,6.80 M133.29,19.62L135.97,13.16 M152.96,30.98L157.22,25.42 M169.02,47.04L174.58,42.78 M180.38,66.71L186.84,64.03 M186.26,88.64L193.20,87.73 M186.26,111.36L193.20,112.27 M180.38,133.29L186.84,135.97 M169.02,152.96L174.58,157.22 M152.96,169.02L157.22,174.58 M133.29,180.38L135.97,186.84 M111.36,186.26L112.27,193.20 M88.64,186.26L87.73,193.20 M66.71,180.38L64.03,186.84 M47.04,169.02L42.78,174.58 M30.98,152.96L25.42,157.22 M19.62,133.29L13.16,135.97 M13.74,111.36L6.80,112.27 M13.74,88.64L6.80,87.73 M19.62,66.71L13.16,64.03 M30.98,47.04L25.42,42.78 M47.04,30.98L42.78,25.42 M66.71,19.62L64.03,13.16 M88.64,13.74L87.73,6.80" stroke="#7a0b10" stroke-width="1.6"/>
+<g fill="url(#bone)" stroke="#0c0708" stroke-width="3" paint-order="stroke" stroke-linejoin="round">
+<g transform="rotate(-9 79 100)"><path d="M71.00,100.00 L71.00,55.60 C71.00,43.60 76.20,39.60 79.00,30.80 C81.80,39.60 87.00,43.60 87.00,55.60 L87.00,100.00 Z" fill="url(#bone)"/><path d="M70.00,79.28 Q79.00,75.48 88.00,79.28" fill="none" stroke="#0c0708" stroke-width="2.6"/><path d="M70.00,60.68 Q79.00,56.88 88.00,60.68" fill="none" stroke="#0c0708" stroke-width="2.6"/></g>
+<g transform="rotate(0 100 100)"><path d="M91.50,100.00 L91.50,48.70 C91.50,35.95 97.03,31.70 100.00,22.35 C102.97,31.70 108.50,35.95 108.50,48.70 L108.50,100.00 Z" fill="url(#bone)"/><path d="M90.50,76.40 Q100.00,72.60 109.50,76.40" fill="none" stroke="#0c0708" stroke-width="2.6"/><path d="M90.50,55.40 Q100.00,51.60 109.50,55.40" fill="none" stroke="#0c0708" stroke-width="2.6"/></g>
+<g transform="rotate(9 121 100)"><path d="M113.00,100.00 L113.00,55.60 C113.00,43.60 118.20,39.60 121.00,30.80 C123.80,39.60 129.00,43.60 129.00,55.60 L129.00,100.00 Z" fill="url(#bone)"/><path d="M112.00,79.28 Q121.00,75.48 130.00,79.28" fill="none" stroke="#0c0708" stroke-width="2.6"/><path d="M112.00,60.68 Q121.00,56.88 130.00,60.68" fill="none" stroke="#0c0708" stroke-width="2.6"/></g>
+<g transform="rotate(-42 66 128)"><path d="M58.00,128.00 L58.00,93.60 C58.00,81.60 63.20,77.60 66.00,68.80 C68.80,77.60 74.00,81.60 74.00,93.60 L74.00,128.00 Z" fill="url(#bone)"/><path d="M57.00,103.60 Q66.00,99.80 75.00,103.60" fill="none" stroke="#0c0708" stroke-width="2.6"/></g>
+<g transform="rotate(42 134 128)"><path d="M126.00,128.00 L126.00,93.60 C126.00,81.60 131.20,77.60 134.00,68.80 C136.80,77.60 142.00,81.60 142.00,93.60 L142.00,128.00 Z" fill="url(#bone)"/><path d="M125.00,103.60 Q134.00,99.80 143.00,103.60" fill="none" stroke="#0c0708" stroke-width="2.6"/></g>
+<path d="M62,100 C62,94 67,90 73,90 L127,90 C133,90 138,94 138,100 L140,128 C140,150 124,166 100,170 C76,166 60,150 60,128 Z"/>
+<path d="M70,94 L130,94" stroke="#0c0708" stroke-width="2.6" fill="none"/>
+</g>
+<path d="M70,128 Q100,104 130,128 Q100,152 70,128 Z" fill="#0c0708"/>
+<path d="M76,128 Q100,110 124,128 Q100,146 76,128 Z" fill="url(#blood)"/>
+<path d="M100,115 Q105,128 100,141 Q95,128 100,115 Z" fill="#0c0708"/>
+<circle cx="93" cy="122" r="2.2" fill="#ffd6cf" opacity="0.85"/>
+<path d="M100,174 C102,180 107,184 107,189 A7,7 0 1 1 93,189 C93,184 98,180 100,174 Z" fill="url(#blood)"/></svg>

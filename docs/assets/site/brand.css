@@ -1,0 +1,61 @@
+/* Brand tokens and Material's dark scheme in the brand colors, shared with Death's Hand.
+   Every color on the site comes from these variables; tints are mixed from
+   them, so recoloring the site means editing this block only. */
+
+@font-face { font-family: Cinzel; src: url(fonts/Cinzel-Variable.woff2) format("woff2"); font-weight: 400 900; font-display: swap; }
+
+:root {
+  --ink: #0c0708;     /* background: the void */
+  --ink-2: #170d10;   /* raised panels */
+  --ink-3: #3a1a1f;   /* borders, inner panels */
+  --ink-4: #070405;   /* terminals, code wells */
+  --brand: #e8363f;   /* primary: fresh blood */
+  --brand-2: #ff8a7e; /* wound light */
+  --brand-3: #7a0b10; /* dried blood */
+  --ok: #a3c98a;      /* grave moss: passing, stable */
+  --warn: #e0b860;    /* tarnished gold: caution, harmonics */
+  --info: #9fb9d0;    /* ghost light: the modulator */
+  --bad: #ff7a4d;     /* pyre: failing, noise */
+  --cream: #efe3cb;   /* bone: headings */
+  --mist: #c6b8a3;    /* ash: body text */
+  --dim: #9a8a7a;     /* dust: secondary text */
+  --display: Cinzel, "Times New Roman", serif;
+
+  --tint: color-mix(in srgb, var(--brand) 9%, transparent);
+  --tint-2: color-mix(in srgb, var(--brand) 15%, transparent);
+  --hairline: color-mix(in srgb, var(--brand) 8%, transparent);
+}
+
+/* Material's dark scheme, recolored to the brand. */
+[data-md-color-scheme="slate"] {
+  --md-hue: 352;
+  --md-default-bg-color: var(--ink);
+  --md-default-fg-color: var(--cream);
+  --md-default-fg-color--light: var(--mist);
+  --md-primary-fg-color: var(--ink);
+  --md-primary-fg-color--dark: var(--ink-3);
+  --md-primary-bg-color: var(--cream);
+  --md-accent-fg-color: var(--brand);
+  --md-typeset-a-color: var(--brand);
+  --md-footer-bg-color: var(--ink-4);
+  --md-footer-bg-color--dark: #050303;
+}
+
+.md-header {
+  background: color-mix(in srgb, var(--ink) 76%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--hairline);
+}
+.md-header__title { font-weight: 700; letter-spacing: -0.02em; }
+.md-header__button.md-logo img { height: 1.6rem; }
+
+/* The occult layer: engraved capitals for the header and the page headings. */
+.md-header__title, .md-typeset h1, .md-typeset h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.md-header__title { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.85rem; }
+.md-typeset h1 { color: var(--cream); letter-spacing: 0.08em; }
+.md-typeset h2 { letter-spacing: 0.05em; }

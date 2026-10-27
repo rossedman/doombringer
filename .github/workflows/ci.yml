@@ -1,0 +1,93 @@
+name: ci
+
+# Lints, runs the host tests, and builds both targets (patch.Init firmware and the VCV Rack plugin)
+# on every pull request and push to main.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      - name: clang-format, ruff, shellcheck, shfmt
+        run: make lint
+      - name: Panel layout matches make_panel.py
+        run: make panel-check
+
+  test:
+    name: host tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Host tests and renders
+        run: make test
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: renders
+          path: test/out/
+          retention-days: 14
+
+  firmware:
+    name: firmware
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - uses: carlosperate/arm-none-eabi-gcc-action@49f4db4520f840e77ab1e99b24cfac2c540a21b1 # v1.14.1
+        with:
+          release: 13.3.Rel1
+      - name: Build libDaisy and the patch.Init firmware
+        run: make firmware -j"$(nproc)"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: firmware
+          path: hw/build/doombringer.bin
+          retention-days: 14
+
+  vcv:
+    name: vcv plugin
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Fetch the Rack SDK
+        run: scripts/fetch-rack-sdk.sh "$RUNNER_TEMP/Rack-SDK"
+      - name: Build the plugin package
+        run: make vcv RACK_DIR="$RUNNER_TEMP/Rack-SDK" -j"$(nproc)"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: vcv-plugin
+          path: vcv/dist/*.vcvplugin
+          retention-days: 14
