@@ -5,6 +5,7 @@ site_name: Doombringer
 site_description: A ladder filter that summons what isn't there, for patch.Init and VCV Rack.
 site_url: https://rossedman.io/doombringer/
 repo_url: https://github.com/rossedman/doombringer
+copyright: A Portal Electronics module · © 2026 Ross Edman, MIT licensed
 repo_name: rossedman/doombringer
 edit_uri: edit/main/docs/
 

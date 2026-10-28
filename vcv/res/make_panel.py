@@ -9,7 +9,7 @@ is converted to outlines with matplotlib's TextPath. Dimensions are real
 Eurorack (3U = 128.5 mm, 1 HP = 5.08 mm), so this is also a starting point for
 a physical front panel. The look is shared with Death's Hand
 (github.com/rossedman/deaths-hand), whose panel this one sits beside; the mark
-is Portal's, and the same function draws the docs' logo and favicon.
+is Portal Electronics', and the same function draws the docs' logo and favicon.
 """
 
 import math
@@ -368,7 +368,7 @@ def drips(x0, x1, y, rng, keep_clear=()):
     return out
 
 
-# The Portal mark (docs/assets/portal.png): a doorway with an eye in a
+# The Portal Electronics mark (docs/assets/portal.png): a doorway with an eye in a
 # triangle, light pouring from it down to the threshold. Traced in the source
 # image's pixel space, where the door with its threshold spans about 326 x 425.
 PORTAL_CENTER = (541, 495)

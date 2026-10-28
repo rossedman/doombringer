@@ -23,7 +23,7 @@ There are no words on the panel, only sigils. The top row is the voice: the cuto
 | Blood drop (solid) | Filter out (the morph) |
 | Blood drop with four poles | Four-pole low-pass out |
 
-Bone rings mark inputs, red rings mark outputs, and the outputs sit on the altar. The Portal mark (the doorway with the eye, bottom left), the edge runes and the summoning circle are decoration.
+Bone rings mark inputs, red rings mark outputs, and the outputs sit on the altar. The Portal Electronics mark (the doorway with the eye, bottom left), the edge runes and the summoning circle are decoration.
 
 ## The macros
 
